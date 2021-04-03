@@ -17,7 +17,6 @@ module.exports = {
 
         try {
             let getResults = await axios.get(`${URL}?place_id=${place_id}&key=${API_KEY}`, config);
-            console.log(getResults);
             res.status(200).json(getResults.data);
         } catch (err) {
             res.status(500).send(err);

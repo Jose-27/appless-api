@@ -42,8 +42,6 @@ module.exports = {
             });
         }
 
-        console.log(tokens);
-
         try {
 
             const mergeDedupe = (arr) => {
