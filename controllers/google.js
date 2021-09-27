@@ -1,8 +1,9 @@
 
 const axios = require('axios');
+const { request } = require('express');
 const BASE_URL = "https://maps.googleapis.com";
 const DEFAULT_RADIUS = "100000";
-const API_KEY = "AIzaSyAOjW56emJ1wzis2Wd8n0HlKP0Mo47I0dY"
+const API_KEY = "AIzaSyCUNe0QGA_r9DRrcii0-usSz7MGBOZLmaM"
 
 const config = {
     headers: {
@@ -13,7 +14,6 @@ const config = {
 
 module.exports = {
     getLandmarks: async (req, res)=>{
-        console.log
         const getUnique = (arr, comp) =>{
             // store the comparison  values in array
             const unique =  arr.map(e => e[comp])
@@ -50,10 +50,11 @@ module.exports = {
                 return axios.get(url, config);
             });
 
+            
             let getResults = await axios.all(requests);
+            console.log(getResults)
             let tempResults = [];
             let tokens = [];
-            
             for(let i=0;i<getResults.length;i++) {
                 tempResults.push(getResults[i].data.results);
                 tokens.push(getResults[i].data.next_page_token);
