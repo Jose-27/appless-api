@@ -1,8 +1,8 @@
 
 const axios = require('axios');
 const BASE_URL = "https://maps.googleapis.com";
-const DEFAULT_RADIUS = "11000";
-const API_KEY = "AIzaSyCUNe0QGA_r9DRrcii0-usSz7MGBOZLmaM"
+const DEFAULT_RADIUS = "100000";
+const API_KEY = "AIzaSyAOjW56emJ1wzis2Wd8n0HlKP0Mo47I0dY"
 
 const config = {
     headers: {
@@ -13,7 +13,7 @@ const config = {
 
 module.exports = {
     getLandmarks: async (req, res)=>{
-
+        console.log
         const getUnique = (arr, comp) =>{
             // store the comparison  values in array
             const unique =  arr.map(e => e[comp])
@@ -32,9 +32,7 @@ module.exports = {
         //console.log('-------------------------------------------------------------'+tokens+'--------------------------------------------------------------------------');
         if(isEnd === 'false'){
             Urls = [
-                `${BASE_URL}/maps/api/place/nearbysearch/json?location=${location}&radius=${DEFAULT_RADIUS}&keyword=Historic+place&pagetoken=&key=${API_KEY}`,
-                `${BASE_URL}/maps/api/place/nearbysearch/json?location=${location}&radius=${DEFAULT_RADIUS}&keyword=Historic+landmark&pagetoken=&key=${API_KEY}`,
-                `${BASE_URL}/maps/api/place/nearbysearch/json?location=${location}&radius=${DEFAULT_RADIUS}&keyword=Historic+Park&pagetoken=&key=${API_KEY}`
+                `${BASE_URL}/maps/api/place/nearbysearch/json?location=${location}&radius=${DEFAULT_RADIUS}&keyword=things+to+do+near+me&pagetoken=&key=${API_KEY}`
             ]
         } else if (tokens !== undefined) {
             Urls = tokens.map((token)=>{
@@ -55,8 +53,7 @@ module.exports = {
             let getResults = await axios.all(requests);
             let tempResults = [];
             let tokens = [];
-        
-
+            
             for(let i=0;i<getResults.length;i++) {
                 tempResults.push(getResults[i].data.results);
                 tokens.push(getResults[i].data.next_page_token);
