@@ -2,7 +2,7 @@
 const axios = require('axios');
 const { request } = require('express');
 const BASE_URL = "https://maps.googleapis.com";
-const DEFAULT_RADIUS = "100000";
+const DEFAULT_RADIUS = "10000";
 const API_KEY = "AIzaSyCUNe0QGA_r9DRrcii0-usSz7MGBOZLmaM"
 
 const config = {
