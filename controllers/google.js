@@ -32,7 +32,7 @@ module.exports = {
         //console.log('-------------------------------------------------------------'+tokens+'--------------------------------------------------------------------------');
         if(isEnd === 'false'){
             Urls = [
-                `${BASE_URL}/maps/api/place/nearbysearch/json?location=${location}&radius=${DEFAULT_RADIUS}&keyword=things+to+do+near+me&pagetoken=&key=${API_KEY}`
+                `${BASE_URL}/maps/api/place/nearbysearch/json?location=${location}&radius=${DEFAULT_RADIUS}&keyword=things+to+do&pagetoken=&key=${API_KEY}`
             ]
         } else if (tokens !== undefined) {
             Urls = tokens.map((token)=>{
