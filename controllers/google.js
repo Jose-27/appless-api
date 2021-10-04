@@ -42,30 +42,25 @@ module.exports = {
 
         try {
 
-            const mergeDedupe = (arr) => {
-                return [...new Set([].concat(...arr))];
-            }
-            
             let requests = Urls.map((url)=>{
                 return axios.get(url, config);
             });
-
             
             let getResults = await axios.all(requests);
-            console.log(getResults)
-            let tempResults = [];
-            let tokens = [];
-            for(let i=0;i<getResults.length;i++) {
-                tempResults.push(getResults[i].data.results);
-                tokens.push(getResults[i].data.next_page_token);
-            }
 
-            let yy = mergeDedupe(tempResults);
-  
+            let apiresults = getResults[0].data.results;
+
+            for (let index = 0; index < apiresults.length; index++) {
+                const element = apiresults[index];
+                const imgUrl = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${element.photos[0].photo_reference}&key=${API_KEY}`
+                apiresults[index]['thumbnail'] = imgUrl;
+            }
+            
             res.status(200).json({
-                "tokens": tokens,
-                "results": getUnique(yy, 'place_id')
+                "tokens": getResults[0].data.tokens,
+                "results": getUnique(apiresults, 'place_id')
             });
+
 
         } catch (err) {
             res.status(500).send(err);
